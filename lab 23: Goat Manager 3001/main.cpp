@@ -65,6 +65,7 @@ int main() {
         } else if (choice == 3) {
             display_trip(trip);
         } else if (choice == 4){
+            cout << "Exiting program" << endl;
             again = false;
         }
     }
@@ -77,7 +78,7 @@ int main_menu() {
     cout << "Choice --> ";
     cin >> user;
     cin.ignore();
-    if (user < 0| user > 4) {
+    if (user < 0 || user > 4) {
         cout << "Not a valid option" << endl;
         return 1;
     }
@@ -109,8 +110,8 @@ void delete_goat(list<Goat> &trip){
         trip.pop_back();
     }
     int counter = 1;
-    for (auto it = trip.begin(); it != trip.end(); ++it) {
-        if (counter == user) {
+    for (auto it = trip.begin(); it != trip.end(); ++it) { //iterates through whole list
+        if (counter == user) { //but only prints at selected delete goat
             cout << "Deleting: " << "[" << counter << "] " <<  it->get_name() << " (" << it->get_age() << ", " << it->get_color() << ") " << endl;
             trip.erase(it);
             return;
@@ -118,19 +119,21 @@ void delete_goat(list<Goat> &trip){
         counter++;
     }
     
-    cout << "New list: " << endl;
+    cout << "\nUpdated list: " << endl;
     display_trip(trip);
 }
 void display_trip(list<Goat> trip){
     if (trip.empty()) {
         cout << "List is empty" << endl;
+        cout << endl;
         return;
     }
-    
+    cout << "\nGoat List: " << endl;
     int i = 1;
     for (auto &val : trip) {
         cout << "[" << i++ << "] " << val.get_name() << " (" << val.get_age() << ", " << val.get_color() << ") " << endl;
     }
+    cout << endl;
 }
 
 int select_goat(list<Goat> trip){
@@ -142,7 +145,7 @@ int select_goat(list<Goat> trip){
     cout << "Select a Goat: ";
     cin >> user;
     cin.ignore();
-    if (user < 0| user > trip.size()) {
+    if (user < 0 || user > trip.size()) {
         cout << "Outside of List" << endl;
         return 1;
     }
