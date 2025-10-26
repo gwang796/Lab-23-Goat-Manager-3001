@@ -15,11 +15,29 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-//function prototypes
+//function select_goat has user input an integer
+//arguments: Goat list trip
+//return: int
 int select_goat(list<Goat> trip);
+
+//function delete_goat deletes user selected goat object
+//arguments: Goat list trip
+//return: none
 void delete_goat(list<Goat> &trip);
+
+//function add_goat adds a goat with random values
+//arguments: Goat list trip, array of names, array of colors
+//return: none
 void add_goat(list<Goat> &trip, string [], string []);
+
+//function display_goat displays list
+//arguments: Goat list trip
+//return: none
 void display_trip(list<Goat> trip);
+
+//function main_menu has user choose action
+//arguments: none
+//return: none
 int main_menu();
 
 int main() {
@@ -36,16 +54,18 @@ int main() {
     i = 0;
     while (fin1 >> colors[i++]);
     fin1.close();
-    list<Goat> trip;
+    list<Goat> trip; //declare Goat list trip
     int choice;
-    while (again) {
+    while (again) { //loops until again = false
         choice = main_menu();
         if (choice == 1) {
             add_goat(trip, names, colors);
         } else if (choice == 2) {
             delete_goat(trip);
         } else if (choice == 3) {
-            
+            display_trip(trip);
+        } else if (choice == 4){
+            again = false;
         }
     }
     return 0;
@@ -73,15 +93,51 @@ void add_goat(list<Goat> &trip, string names[], string colors[]){
     
     Goat newGoat(name, randomAge, color);
     trip.push_back(newGoat);
+    display_trip(trip);
 }
+
+void delete_goat(list<Goat> &trip){
+    if (trip.empty()) {
+        cout << "List is empty" << endl;
+        return;
+     }
+    int user = select_goat(trip); //call select_goat function
+    if (user == 1) { //if user selects head of list
+        trip.pop_front();
+    }
+    if (user == trip.size()) { //if user selects tail of list
+        trip.pop_back();
+    }
+    int counter = 1;
+    for (auto it = trip.begin(); it != trip.end(); ++it) {
+        if (counter == user) {
+            cout << "Deleting: " << "[" << counter << "] " <<  it->get_name() << " (" << it->get_age() << ", " << it->get_color() << ") " << endl;
+            trip.erase(it);
+            return;
+        }
+        counter++;
+    }
+    
+    cout << "New list: " << endl;
+    display_trip(trip);
+}
+void display_trip(list<Goat> trip){
+    if (trip.empty()) {
+        cout << "List is empty" << endl;
+        return;
+    }
+    
+    int i = 1;
+    for (auto &val : trip) {
+        cout << "[" << i++ << "] " << val.get_name() << " (" << val.get_age() << ", " << val.get_color() << ") " << endl;
+    }
+}
+
 int select_goat(list<Goat> trip){
     if (trip.empty()) {
         cout << "List is empty" << endl;
         return 1;
      }
-    
-    display_trip(trip);
-    
     int user;
     cout << "Select a Goat: ";
     cin >> user;
@@ -91,40 +147,4 @@ int select_goat(list<Goat> trip){
         return 1;
     }
     return user;
-}
-void delete_goat(list<Goat> &trip){
-    if (trip.empty()) {
-        cout << "List is empty" << endl;
-        return;
-     }
-    
-    int user;
-    cout << "Select a Goat to be deleted: ";
-    cin >> user;
-    cin.ignore();
-    
-    if (user < 0| user > trip.size()) {
-        cout << "Outside of List" << endl;
-        return;
-    }
-    
-    if (user == 1) {
-        trip.pop_front();
-    }
-    
-    if (user == trip.size()) {
-        trip.pop_back();
-    }
-    
-    
-}
-void display_trip(list<Goat> trip){
-    if (trip.empty()) {
-        cout << "List is empty" << endl;
-        return;
-     }
-    int i = 1;
-    for (auto &val : trip) {
-        cout << "[" << i++ << "] " << val.get_name() << " (" << val.get_age() << ", " << val.get_color() << ") " << endl;
-    }
 }
