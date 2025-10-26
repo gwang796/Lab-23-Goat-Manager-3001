@@ -36,7 +36,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/guoanwang/Desktop/CS-210/lab 23: Goat Manager 3001"
+      customWorkingDirectory = "/Users/guoanwang/Desktop/CS-210/lab 23: Goat Manager 3001/lab 23: Goat Manager 3001/New Folder"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
