@@ -2,7 +2,6 @@
 //  main.cpp
 //  COMSC-210 | lab 23: Goat Manager 3001 | Guo An Wang
 //  IDE: Xcode
-//  Created by Guo An Wang on 10/25/25.
 //
 
 #include <iostream>
