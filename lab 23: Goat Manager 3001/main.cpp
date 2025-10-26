@@ -24,7 +24,7 @@ int main_menu();
 
 int main() {
     srand(time(0));
-    bool again;
+    bool again = true;
     // read & populate arrays for names and colors
     ifstream fin("Names.txt");
     string names[SZ_NAMES];
@@ -37,6 +37,17 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
     list<Goat> trip;
+    int choice;
+    while (again) {
+        choice = main_menu();
+        if (choice == 1) {
+            add_goat(trip, names, colors);
+        } else if (choice == 2) {
+            delete_goat(trip);
+        } else if (choice == 3) {
+            
+        }
+    }
     return 0;
 }
 int main_menu() {
