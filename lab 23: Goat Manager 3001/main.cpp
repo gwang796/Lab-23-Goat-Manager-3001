@@ -46,7 +46,7 @@ int main_menu() {
     cout << "Choice --> ";
     cin >> user;
     cin.ignore();
-    if (user > 4) {
+    if (user < 0| user > 4) {
         cout << "Not a valid option" << endl;
         return 1;
     }
@@ -63,10 +63,48 @@ void add_goat(list<Goat> &trip, string names[], string colors[]){
     Goat newGoat(name, randomAge, color);
     trip.push_back(newGoat);
 }
-//int select_goat(list<Goat> trip){
+int select_goat(list<Goat> trip){
+    if (trip.empty()) {
+        cout << "List is empty" << endl;
+        return 1;
+     }
     
-//}
+    display_trip(trip);
+    
+    int user;
+    cout << "Select a Goat: ";
+    cin >> user;
+    cin.ignore();
+    if (user < 0| user > trip.size()) {
+        cout << "Outside of List" << endl;
+        return 1;
+    }
+    return user;
+}
 void delete_goat(list<Goat> &trip){
+    if (trip.empty()) {
+        cout << "List is empty" << endl;
+        return;
+     }
+    
+    int user;
+    cout << "Select a Goat to be deleted: ";
+    cin >> user;
+    cin.ignore();
+    
+    if (user < 0| user > trip.size()) {
+        cout << "Outside of List" << endl;
+        return;
+    }
+    
+    if (user == 1) {
+        trip.pop_front();
+    }
+    
+    if (user == trip.size()) {
+        trip.pop_back();
+    }
+    
     
 }
 void display_trip(list<Goat> trip){
