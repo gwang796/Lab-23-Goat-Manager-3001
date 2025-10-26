@@ -70,5 +70,12 @@ void delete_goat(list<Goat> &trip){
     
 }
 void display_trip(list<Goat> trip){
-    
+    if (trip.empty()) {
+        cout << "List is empty" << endl;
+        return;
+     }
+    int i = 1;
+    for (auto &val : trip) {
+        cout << "[" << i++ << "] " << val.get_name() << " (" << val.get_age() << ", " << val.get_color() << ") " << endl;
+    }
 }
