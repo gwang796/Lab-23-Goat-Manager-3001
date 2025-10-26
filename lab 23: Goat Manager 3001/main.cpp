@@ -8,6 +8,8 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <ctime>
+#include <cstdlib>
 #include "Goat.h"
 using namespace std;
 
@@ -34,19 +36,13 @@ int main() {
     i = 0;
     while (fin1 >> colors[i++]);
     fin1.close();
-    
-    for (int i = 0; i < SZ_NAMES; i++) {
-        cout << names[i] << endl;
-    }
-    for (int i = 0; i < SZ_COLORS; i++) {
-        cout << colors[i] << endl;
-    }
+    list<Goat> trip;
     return 0;
 }
 int main_menu() {
     int user;
     cout << "*** GOAT MANAGER 3001 ***" << endl;
-    cout << "[1] Add a goat \n [2] Delete a goat \n[3] List goats \n[4] Quit" << endl;
+    cout << "[1] Add a goat \n[2] Delete a goat \n[3] List goats \n[4] Quit" << endl;
     cout << "Choice --> ";
     cin >> user;
     cin.ignore();
@@ -56,14 +52,21 @@ int main_menu() {
     }
     return user;
 }
-
+void add_goat(list<Goat> &trip, string names[], string colors[]){
+    int randomName = rand() % SZ_NAMES;
+    int randomColor = rand() % SZ_COLORS;
+    int randomAge = rand() % MAX_AGE;
+    
+    string name = names[randomName];
+    string color = colors[randomColor];
+    
+    Goat newGoat(name, randomAge, color);
+    trip.push_back(newGoat);
+}
 //int select_goat(list<Goat> trip){
     
 //}
 void delete_goat(list<Goat> &trip){
-    
-}
-void add_goat(list<Goat> &trip, string [], string []){
     
 }
 void display_trip(list<Goat> trip){
